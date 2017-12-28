@@ -1,0 +1,45 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<title> .: Administrar usuarios :. </title>
+		<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript">
+
+		
+			function validar_palabras(this_all) {
+				var palabras_a_validar = ["administrador","lectura","escritura","modificacion"];
+				var cadena_encontrada = "";
+				for(indice_cadena in palabras_a_validar){
+					var cadena_actual = palabras_a_validar[indice_cadena];
+					var verificador = true;
+					for (var i = 0; i < $(this_all).val().length; i++) {	
+						if (cadena_actual[i]!=$(this_all).val()[i]) {
+							verificador=false;
+						}
+					}
+					if (verificador) {
+						cadena_encontrada=indice_cadena;
+						break;
+					}	
+				}
+					if (cadena_encontrada!="") {
+						var cadena_escrita = "";
+						for (var i = 0 ; i < $(this_all).val().length; i++) {
+							cadena_escrita += $(this_all).val()[i];	
+							if (palabras_a_validar[cadena_encontrada].indexOf(cadena_escrita)==-1 || cadena_escrita[i]!=palabras_a_validar[cadena_encontrada][i]) {
+								$(this_all).val("");
+							}
+						}
+					}else{
+						$(this_all).val("");
+					}
+			}		
+		</script>
+
+</head>
+<body>
+			<input type="text" onkeyup="validar_palabras(this)" placeholder="Validar administrador,lectura,escritura y modificacion" id="buscar">
+</body>
+</html>
